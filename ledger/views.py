@@ -1,135 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from .models import Recipe
 
-# Create your views here.
+# Home View
+def home(request):
+    return HttpResponse("<h1>Welcome to the Recipe Book!</h1><p><a href='/recipes/list'>View Recipes</a></p>")
+
+
 def recipe_list(request):
-    context = {
-        "recipes": [
-            {
-                "name": "Recipe 1",
-                "ingredients": [
-                    {
-                        "name": "tomato",
-                        "quantity": "3pcs"
-                    },
-                    {
-                        "name": "onion",
-                        "quantity": "1pc"
-                    },
-                    {
-                        "name": "pork",
-                        "quantity": "1kg"
-                    },
-                    {
-                        "name": "water",
-                        "quantity": "1L"
-                    },
-                    {
-                        "name": "sinigang mix",
-                        "quantity": "1 packet"
-                    }
-                ],
-                "link": "/recipe/1"
-            },
-            {
-                "name": "Recipe 2",
-                "ingredients": [
-                    {
-                        "name": "garlic",
-                        "quantity": "1 head"
-                    },
-                    {
-                        "name": "onion",
-                        "quantity": "1pc"
-                    },
-                    {
-                        "name": "vinegar",
-                        "quantity": "1/2cup"
-                    },
-                    {
-                        "name": "water",
-                        "quanity": "1 cup"
-                    },
-                    {
-                        "name": "salt",
-                        "quantity": "1 tablespoon"
-                    },
-                    {
-                        "name": "whole black peppers",
-                        "quantity": "1 tablespoon"
-                    },
-                    {
-                        "name": "pork",
-                        "quantity": "1 kilo"
-                    }
-                ],
-                "link": "/recipe/2"
-            }
-        ]
-    }
-    return render(request, "ledger/recipe_list.html", context)
+    recipes = Recipe.objects.all()
+    return render(request, "ledger/recipe_list.html", {"recipes": recipes})
 
-def recipe_1(request):
-    context = {
-        "name": "Recipe 1",
-        "ingredients": [
-            {
-                "name": "tomato",
-                "quantity": "3pcs"
-            },
-            {
-                "name": "onion",
-                "quantity": "1pc"
-            },
-            {
-                "name": "pork",
-                "quantity": "1kg"
-            },
-            {
-                "name": "water",
-                "quantity": "1L"
-            },
-            {
-                "name": "sinigang mix",
-                "quantity": "1 packet"
-            }
-        ],
-        "link": "/recipe/1"
-    }
-    return render(request, "ledger/recipe_1.html", context)
-
-def recipe_2(request):
-    context = {
-        "name": "Recipe 2",
-        "ingredients": [
-            {
-                "name": "garlic",
-                "quantity": "1 head"
-            },
-            {
-                "name": "onion",
-                "quantity": "1pc"
-            },
-            {
-                "name": "vinegar",
-                "quantity": "1/2cup"
-            },
-            {
-                "name": "water",
-                "quantity": "1 cup"
-            },
-            {
-                "name": "salt",
-                "quantity": "1 tablespoon"
-            },
-            {
-                "name": "whole black peppers",
-                "quantity": "1 tablespoon"
-            },
-            {
-                "name": "pork",
-                "quantity": "1 kilo"
-            }
-        ],
-        "link": "/recipe/2"
-    }
-    return render(request, "ledger/recipe_2.html", context)
+def recipe_detail(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    return render(request, "ledger/recipe_detail.html", {"recipe": recipe})
