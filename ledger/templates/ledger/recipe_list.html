@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Recipe List</title>
-</head>
-<body>
-    <h1>Recipe List</h1>
+{% extends "base.html" %}
+
+{% block content %}
+
+    <p>Recipe List</p>
     <ul>
         {% for recipe in recipes %}
-            <li><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></li>
+            <li><a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.name }}</a></li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
