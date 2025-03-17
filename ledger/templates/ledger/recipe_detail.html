@@ -3,12 +3,12 @@
 {% block content %}
 <h1>{{ recipe.name }}</h1>
 <p>By: {{ recipe.author.username }}</p>
-<p>Created on: {{ recipe.created_on }}</p>
-<p>Last updated: {{recipe.updated_on}}</p>
+<p>Created on: {{ recipe.created_on|date:"F d, Y H:i" }}</p>
+<p>Last updated: {{ recipe.updated_on|date:"F d, Y H:i" }}</p>
 
 <h2>Ingredients:</h2>
 <ul>
-    {% for ingredient in recipe.ingredients.all %}
+    {% for ingredient in recipe.recipeingredient_set.all %}
         <li>{{ ingredient.quantity }} - {{ ingredient.ingredient.name }}</li>
     {% endfor %}
 </ul>
