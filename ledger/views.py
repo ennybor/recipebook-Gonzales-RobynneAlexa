@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-#from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Recipe
 from django.contrib.auth import authenticate, login, logout
+from .models import Recipe, RecipeIngredient 
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -32,4 +31,5 @@ def recipe_list(request):
 @login_required
 def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    return render(request, "ledger/recipe_detail.html", {"recipe": recipe})
+    ingredients = RecipeIngredient.objects.filter(recipe=recipe) 
+    return render(request, "ledger/recipe_detail.html", {"recipe": recipe, "ingredients": ingredients}) 

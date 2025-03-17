@@ -1,4 +1,12 @@
+<!--
+https://www.w3schools.com/php/func_filesystem_filemtime.asp
+https://www.w3schools.com/tags/default.asp
+-->
+
+
 {% extends "base.html" %}
+
+{% block page_heading %}Recipe Details{% endblock %}
 
 {% block content %}
 <h1>{{ recipe.name }}</h1>
@@ -8,10 +16,12 @@
 
 <h2>Ingredients:</h2>
 <ul>
-    {% for ingredient in recipe.recipeingredient_set.all %}
-        <li>{{ ingredient.quantity }} - {{ ingredient.ingredient.name }}</li>
+    {% for ingredient in ingredients %}
+        <li>{{ ingredient.ingredient.name }} - {{ ingredient.quantity }}</li>
+    {% empty %}
+        <li>There are no added ingredients.</li>
     {% endfor %}
 </ul>
 
-<a href="{% url 'recipe_list' %}">Back to Recipes</a>
+<a href="{% url 'recipe_list' %}"><button>Back to Recipes</button></a>
 {% endblock %}
