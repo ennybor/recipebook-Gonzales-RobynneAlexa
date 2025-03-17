@@ -1,5 +1,0 @@
-ad12f78 Completed lab2. Implemented database for recipes.
-5355eac Added final newline. Just looked it up and yes it is helpful clean code. Cool.
-4c708bf Added blank line at the end to align with pylint suggestions. Disregarded creating doc strings. Note, env is removed from the github repo at this point.
-be37cbe Added file .gitignore to exlude the env from the github project.
-d39ae7c Initialized recipebook project. Note that env is still included.
