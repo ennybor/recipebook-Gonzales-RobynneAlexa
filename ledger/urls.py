@@ -1,7 +1,10 @@
 from django.urls import path
-from . import views
+#from . import views
+from .views import recipe_list, recipe_detail, login_view, logout_view
 
 urlpatterns = [
-    path('recipes/', views.recipe_list, name='recipe_list'),
-    path('recipe/<int:recipe_id>/', views.recipe_detail, name='recipe_detail'),
+    path("", login_view, name="login"),
+    path("recipes/list/", recipe_list, name='recipe_list'),
+    path("recipes/<int:recipe_id>/", recipe_detail, name='recipe_detail'),
+    path("logout/", logout_view, name="logout"),
 ]
