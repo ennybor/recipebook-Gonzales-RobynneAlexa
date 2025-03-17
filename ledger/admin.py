@@ -5,7 +5,7 @@ class RecipeIngredientInline(admin.TabularInline):
     model = RecipeIngredient
     extra = 1
 @admin.register(Profile)
-class ProfileAdmin(admin.ModuleAdmin):
+class ProfileAdmin(admin.ModelAdmin):
     list_display = ("user", "name", "bio")
 
 @admin.register(Recipe)
