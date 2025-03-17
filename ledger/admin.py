@@ -12,7 +12,6 @@ class ProfileAdmin(admin.ModelAdmin):
 class RecipeAdmin(admin.ModelAdmin):
     list_display = ("name", "author", "created_on", "updated_on")
     search_fields = ("name", "author__username")
-    #inlines = [RecipeIngredientInline]
     list_filter = ("created_on", "updated_on")
 
 @admin.register(Ingredient)
