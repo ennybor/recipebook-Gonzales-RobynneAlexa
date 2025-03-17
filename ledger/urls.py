@@ -1,5 +1,4 @@
 from django.urls import path
-#from . import views
 from .views import recipe_list, recipe_detail, login_view, logout_view
 
 urlpatterns = [
