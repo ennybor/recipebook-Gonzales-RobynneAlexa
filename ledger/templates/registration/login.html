@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login | Recipe Book</title>
+</head>
+<body>
+    <h1>Login to Recipe Book</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="#">Sign up</a></p>
+</body>
+</html>
