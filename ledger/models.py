@@ -11,7 +11,7 @@ class Profile(models.Model):
         return self.name or self.user.username
 
 class Ingredient(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
@@ -29,9 +29,17 @@ class Recipe(models.Model):
         return reverse("recipe_detail", args=[str(self.id)])
 
 class RecipeIngredient(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="ingredients")
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name="recipe")
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')
+    ingredient = models.CharField(max_length=100)
     quantity = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.quantity} of {self.ingredient.name} for {self.recipe.name}"
+        return f"{self.quantity} of {self.ingredient}"
+
+class RecipeImage(models.Model):
+    image = models.ImageField(upload_to='recipe_images/')
+    description = models.CharField(max_length=255)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='images')
+
+    def __str__(self):
+        return f"{self.recipe.name} of {self.description}"

@@ -4,18 +4,31 @@
 
 {% block content %}
 <h1>{{ recipe.name }}</h1>
-<p>By: {{ recipe.author.username }}</p>
+<p>Author: {{ recipe.author.username }}</p>
 <p>Created on: {{ recipe.created_on|date:"F d, Y H:i" }}</p>
 <p>Last updated: {{ recipe.updated_on|date:"F d, Y H:i" }}</p>
 
 <h2>Ingredients:</h2>
 <ul>
     {% for ingredient in ingredients %}
-        <li>{{ ingredient.ingredient.name }} - {{ ingredient.quantity }}</li>
+        <li>{{ ingredient.quantity }} of {{ ingredient.ingredient }} </li>
     {% empty %}
         <li>There are no added ingredients.</li>
     {% endfor %}
 </ul>
+
+<h2>Images:</h2>
+{% if images %}
+    <ul>
+        {% for image in images %}
+            <li>
+                <img src="{{ image.image.url }}" alt="{{ image.description }}" style="max-width: 300px;">
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No images available for this recipe.</p>
+{% endif %}
 
 <a href="{% url 'recipe_list' %}"><button>Back to Recipes</button></a>
 {% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block page_heading %}Add New Recipe{% endblock %}
+
+{% block content %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <h3>Recipe Information</h3>
+    {{ recipe_form.as_p }}  
+
+    <h3>Ingredients:</h3>
+    <p>Please input units along with quantity. <br>
+    Example: 2 tbps / 3 pcs / 4 slices</p>
+    {{ formset.management_form }}
+    {% for form in formset %}
+      <div class="ingredient-form">
+        {{ form.as_p }}
+      </div>
+    {% endfor %}
+
+    <h3>Upload an Image:</h3>
+    {{ image_form.as_p }}
+
+    <button type="submit">Create Recipe</button>
+  </form>
+  <br>
+
+  <a href="{% url 'recipe_list' %}">Back to Recipe List</a>
+{% endblock %}
